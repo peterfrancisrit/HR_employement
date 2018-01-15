@@ -14,7 +14,7 @@ import numpy as np
 
 # Import data using pandas
 import pandas as pd
-data = pd.read_csv('/Users/harryritchie/Documents/Personal/Employment/HR_employement/HR_comma_sep.csv',delimiter=';',header=0,engine='python')
+data = pd.read_csv('/Users/harryritchie/Documents/Personal/Employment/HR_employment/HR_comma_sep.csv',delimiter=';',header=0,engine='python')
 
 # Separate response from predictors
 y = data['satisfaction_level']
@@ -28,23 +28,32 @@ X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=0.33,random_st
 # Create linear regression object
 from sklearn import datasets, linear_model
 from sklearn.metrics import mean_squared_error, r2_score
-model = linear_model.LinearRegression()
+from sklearn import svm
+model_lr = linear_model.LinearRegression()
+model_svm = svm.SVR(kernel='poly')
+
 
 
 # Train the model using the training sets
-model.fit(X_train, y_train)
+model_lr.fit(X_train, y_train)
+model_svm.fit(X_train,y_train)
+
 
 # Prediction
-y_pred = model.predict(X_test)
+y_pred_lr = model_lr.predict(X_test)
+y_pred_svm = model_svm.predict(X_test)
 
-
-# The coefficients
-print('Coefficients: \n', model.coef_)
+ 
+# The coefficients LR
+print('Coefficients: \n', model_lr.coef_)
 # The mean squared error
-print("Mean squared error: %.2f" % mean_squared_error(y_test, y_pred))
+print("Mean squared error: %.2f" % mean_squared_error(y_test, y_pred_lr))
 # Explained variance score: 1 is perfect prediction
-print('Variance score: %.2f' % r2_score(y_test, y_pred))
-
+print('Variance score: %.2f' % r2_score(y_test, y_pred_lr))
+# The mean squared error
+print("Mean squared error: %.2f" % mean_squared_error(y_test, y_pred_svm))
+# Explained variance score: 1 is perfect prediction
+print('Variance score: %.2f' % r2_score(y_test, y_pred_svm))
 # CLASSIFICATION 
 
 # Courtesy of Author: Tim Head <betatim@gmail.com>
