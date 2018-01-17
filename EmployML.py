@@ -30,7 +30,7 @@ from sklearn import datasets, linear_model
 from sklearn.metrics import mean_squared_error, r2_score
 from sklearn import svm
 model_lr = linear_model.LinearRegression()
-model_svm = svm.SVR(kernel='poly')
+model_svm = svm.SVR(kernel='rbf')
 
 
 
@@ -137,6 +137,7 @@ print("RANDOM FOREST + LINEAR MODEL AUC = ", auc_rf_lm, '\n')
 print("GRADIENT BOOSTER + LINEAR MODEL AUC = ", auc_grd_lm, '\n')
 print("GRADIENT BOOSTED MODEL AUC = ", auc_grd, '\n')
 print("RANDOM FOREST AUC = ", auc_rf, '\n')
+
 
 
 plt.figure(1)
